@@ -216,8 +216,13 @@ public class MapperMethod {
 
   }
 
+  /**
+   * sql执行语句
+   */
   public static class SqlCommand {
-
+    /**
+     * sql id和方法名对应
+     */
     private final String name;
     private final SqlCommandType type;
 
@@ -253,12 +258,15 @@ public class MapperMethod {
 
     private MappedStatement resolveMappedStatement(Class<?> mapperInterface, String methodName,
         Class<?> declaringClass, Configuration configuration) {
+      // sql语句的唯一id 接口名.方法名
       String statementId = mapperInterface.getName() + "." + methodName;
       if (configuration.hasStatement(statementId)) {
         return configuration.getMappedStatement(statementId);
       } else if (mapperInterface.equals(declaringClass)) {
+        // 方法所在的接口
         return null;
       }
+      // 递归从父接口中找到方法所在的接口
       for (Class<?> superInterface : mapperInterface.getInterfaces()) {
         if (declaringClass.isAssignableFrom(superInterface)) {
           MappedStatement ms = resolveMappedStatement(superInterface, methodName,
@@ -272,17 +280,45 @@ public class MapperMethod {
     }
   }
 
+  /**
+   * 方法签名，对方法的详细信息
+   *
+   * 方法： 和sql语句对应的java方法
+   */
   public static class MethodSignature {
 
+    /**
+     * 是否是返回的集合类型
+     */
     private final boolean returnsMany;
+    /**
+     * 是否是返回的mao类型
+     */
     private final boolean returnsMap;
     private final boolean returnsVoid;
     private final boolean returnsCursor;
     private final boolean returnsOptional;
+    /**
+     * 返回类型
+     */
     private final Class<?> returnType;
+    /**
+     * 返回类型是map时，这里记录所有map中的key
+     * 方法上注解的 #org.apache.ibatis.annotations.MapKey
+     */
     private final String mapKey;
+    /**
+     * 返回resultHandler参数的位置
+     */
     private final Integer resultHandlerIndex;
+    /**
+     * rowBounds的位置
+     * TODO: rowBounds
+     */
     private final Integer rowBoundsIndex;
+    /**
+     * 参数名称解析器
+     */
     private final ParamNameResolver paramNameResolver;
 
     public MethodSignature(Configuration configuration, Class<?> mapperInterface, Method method) {
