@@ -40,9 +40,12 @@ public class MapperProxy<T> implements InvocationHandler, Serializable {
   private static final int ALLOWED_MODES = MethodHandles.Lookup.PRIVATE | MethodHandles.Lookup.PROTECTED
       | MethodHandles.Lookup.PACKAGE | MethodHandles.Lookup.PUBLIC;
   private static final Constructor<Lookup> lookupConstructor;
+  // jdk9以后为啥使用privateLookupIn方法
   private static final Method privateLookupInMethod;
   private final SqlSession sqlSession;
   private final Class<T> mapperInterface;
+  // 缓存 method 和 MapperMethod的调用器
+  // ？ 这里有sqlSession了，为啥 MapperMethodInvoker 还要传入 sqlSession， 同一个
   private final Map<Method, MapperMethodInvoker> methodCache;
 
   public MapperProxy(SqlSession sqlSession, Class<T> mapperInterface, Map<Method, MapperMethodInvoker> methodCache) {
@@ -117,6 +120,7 @@ public class MapperProxy<T> implements InvocationHandler, Serializable {
   private MethodHandle getMethodHandleJava9(Method method)
       throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
     final Class<?> declaringClass = method.getDeclaringClass();
+    // [JDK] MethodType 方法的返回类型和参数类型
     return ((Lookup) privateLookupInMethod.invoke(null, declaringClass, MethodHandles.lookup())).findSpecial(
         declaringClass, method.getName(), MethodType.methodType(method.getReturnType(), method.getParameterTypes()),
         declaringClass);

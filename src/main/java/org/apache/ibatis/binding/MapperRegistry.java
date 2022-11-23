@@ -31,9 +31,12 @@ import org.apache.ibatis.session.SqlSession;
  * @author Eduardo Macarron
  * @author Lasse Voss
  */
+// mapper 注册器
 public class MapperRegistry {
 
   private final Configuration config;
+  // 只在启动加载的时候使用，所以这里的hashMap
+  // class 对应的 mapper 接口class
   private final Map<Class<?>, MapperProxyFactory<?>> knownMappers = new HashMap<>();
 
   public MapperRegistry(Configuration config) {
@@ -58,10 +61,12 @@ public class MapperRegistry {
   }
 
   public <T> void addMapper(Class<T> type) {
+    // 只处理接口类型
     if (type.isInterface()) {
       if (hasMapper(type)) {
         throw new BindingException("Type " + type + " is already known to the MapperRegistry.");
       }
+      // 加载是否完成， 报错直接移除
       boolean loadCompleted = false;
       try {
         knownMappers.put(type, new MapperProxyFactory<>(type));
@@ -69,6 +74,7 @@ public class MapperRegistry {
         // otherwise the binding may automatically be attempted by the
         // mapper parser. If the type is already known, it won't try.
         MapperAnnotationBuilder parser = new MapperAnnotationBuilder(config, type);
+        // TODO 对类验证解析
         parser.parse();
         loadCompleted = true;
       } finally {

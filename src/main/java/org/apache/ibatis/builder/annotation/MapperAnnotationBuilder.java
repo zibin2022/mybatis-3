@@ -94,6 +94,7 @@ import org.apache.ibatis.type.UnknownTypeHandler;
  * @author Clinton Begin
  * @author Kazuki Shimizu
  */
+// mapper中注解的解析
 public class MapperAnnotationBuilder {
 
   private static final Set<Class<? extends Annotation>> statementAnnotationTypes = Stream
