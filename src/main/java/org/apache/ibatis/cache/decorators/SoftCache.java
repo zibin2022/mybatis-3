@@ -28,10 +28,15 @@ import org.apache.ibatis.cache.Cache;
  *
  * @author Clinton Begin
  */
+// 软引用缓存包装器
+  // put和get前都要移除已经被垃圾回收掉的类
 public class SoftCache implements Cache {
+  // 避免垃圾回收的硬链接队列， 保留这部分不被垃圾回收
   private final Deque<Object> hardLinksToAvoidGarbageCollection;
+  // 已经被垃圾回收实体的对类
   private final ReferenceQueue<Object> queueOfGarbageCollectedEntries;
   private final Cache delegate;
+  // 硬链接数
   private int numberOfHardLinks;
 
   public SoftCache(Cache delegate) {

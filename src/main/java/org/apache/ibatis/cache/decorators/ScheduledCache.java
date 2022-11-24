@@ -22,6 +22,7 @@ import org.apache.ibatis.cache.Cache;
 /**
  * @author Clinton Begin
  */
+// 定时缓存  每次写入和读取检查过期情况
 public class ScheduledCache implements Cache {
 
   private final Cache delegate;
@@ -83,6 +84,7 @@ public class ScheduledCache implements Cache {
   }
 
   private boolean clearWhenStale() {
+    // 超时
     if (System.currentTimeMillis() - lastClear > clearInterval) {
       clear();
       return true;

@@ -57,6 +57,8 @@ import org.apache.ibatis.logging.LogFactory;
  * @param <T>
  *          the generic type
  */
+
+// 解决工具， 分装了获取包下的所有类 包含注解类的方法等
 public class ResolverUtil<T> {
 
   /**
@@ -205,6 +207,13 @@ public class ResolverUtil<T> {
     }
 
     return this;
+  }
+
+  // test code
+  public static void main(String[] args) {
+    ResolverUtil<VFS> resolverUtil = new ResolverUtil<VFS>();
+    ResolverUtil<VFS> re = resolverUtil.findImplementations(VFS.class, "org.apache.ibatis.io");
+    System.out.println("");
   }
 
   /**

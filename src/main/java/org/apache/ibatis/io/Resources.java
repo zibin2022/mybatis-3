@@ -30,6 +30,7 @@ import java.util.Properties;
  *
  * @author Clinton Begin
  */
+// 资源访问类，通过classloader
 public class Resources {
 
   private static ClassLoaderWrapper classLoaderWrapper = new ClassLoaderWrapper();

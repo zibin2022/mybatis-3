@@ -22,11 +22,13 @@ import org.apache.ibatis.logging.LogFactory;
 /**
  * @author Clinton Begin
  */
+// 可以答应缓存命中率
 public class LoggingCache implements Cache {
 
   private final Log log;
   private final Cache delegate;
   protected int requests = 0;
+  // 缓存存在的数量
   protected int hits = 0;
 
   public LoggingCache(Cache delegate) {

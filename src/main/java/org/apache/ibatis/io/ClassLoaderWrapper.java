@@ -23,9 +23,12 @@ import java.net.URL;
  *
  * @author Clinton Begin
  */
+//类加载包装器
 public class ClassLoaderWrapper {
 
+  // 默认类加载器， 什么作用？
   ClassLoader defaultClassLoader;
+  // 系统类加载器
   ClassLoader systemClassLoader;
 
   ClassLoaderWrapper() {
@@ -199,11 +202,11 @@ public class ClassLoaderWrapper {
 
   ClassLoader[] getClassLoaders(ClassLoader classLoader) {
     return new ClassLoader[]{
-        classLoader,
-        defaultClassLoader,
-        Thread.currentThread().getContextClassLoader(),
-        getClass().getClassLoader(),
-        systemClassLoader};
+        classLoader, //指定
+        defaultClassLoader, // 默认类加载器 null
+        Thread.currentThread().getContextClassLoader(), // 当前线程的类加载器
+        getClass().getClassLoader(), // 本类的加载器
+        systemClassLoader}; // 系统类加载器
   }
 
 }

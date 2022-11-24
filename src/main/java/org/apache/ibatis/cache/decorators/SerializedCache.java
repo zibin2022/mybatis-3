@@ -32,6 +32,7 @@ import org.apache.ibatis.io.SerialFilterChecker;
 /**
  * @author Clinton Begin
  */
+// 序列化缓存
 public class SerializedCache implements Cache {
 
   private final Cache delegate;

@@ -24,6 +24,7 @@ import org.apache.ibatis.cache.CacheException;
 /**
  * @author Clinton Begin
  */
+// 缓存的实现类
 public class PerpetualCache implements Cache {
 
   private final String id;

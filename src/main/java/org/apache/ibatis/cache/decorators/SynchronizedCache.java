@@ -20,6 +20,7 @@ import org.apache.ibatis.cache.Cache;
 /**
  * @author Clinton Begin
  */
+// 同步的缓存包装器，简单粗暴的读写加锁
 public class SynchronizedCache implements Cache {
 
   private final Cache delegate;

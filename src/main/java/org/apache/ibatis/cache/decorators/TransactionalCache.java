@@ -35,13 +35,17 @@ import org.apache.ibatis.logging.LogFactory;
  * @author Clinton Begin
  * @author Eduardo Macarron
  */
+// 装饰者
 public class TransactionalCache implements Cache {
 
   private static final Log log = LogFactory.getLog(TransactionalCache.class);
 
+  // 代表
   private final Cache delegate;
   private boolean clearOnCommit;
+  // 实体类增加到缓存
   private final Map<Object, Object> entriesToAddOnCommit;
+  // 实体类没有缓存
   private final Set<Object> entriesMissedInCache;
 
   public TransactionalCache(Cache delegate) {
@@ -111,6 +115,7 @@ public class TransactionalCache implements Cache {
     entriesMissedInCache.clear();
   }
 
+  // 拉起代办实体
   private void flushPendingEntries() {
     for (Map.Entry<Object, Object> entry : entriesToAddOnCommit.entrySet()) {
       delegate.putObject(entry.getKey(), entry.getValue());

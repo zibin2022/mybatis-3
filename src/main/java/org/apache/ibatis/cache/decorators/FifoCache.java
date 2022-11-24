@@ -25,6 +25,7 @@ import org.apache.ibatis.cache.Cache;
  *
  * @author Clinton Begin
  */
+// 先进先出缓存
 public class FifoCache implements Cache {
 
   private final Cache delegate;
@@ -64,6 +65,7 @@ public class FifoCache implements Cache {
 
   @Override
   public Object removeObject(Object key) {
+    // 没有对相应的队列做处理
     return delegate.removeObject(key);
   }
 

@@ -65,6 +65,7 @@ public class JBoss6VFS extends VFS {
     }
   }
 
+  // 为什么要定义一个类名和父类相同的类， 和Jboss中的类相对应
   /** A class that mimics a tiny subset of the JBoss VFS class. */
   static class VFS {
     static Class<?> VFS;

@@ -30,6 +30,7 @@ import org.apache.ibatis.logging.LogFactory;
 /**
  * Provides a very simple API for accessing resources within an application server.
  *
+ * 封装了访问资源的api
  * @author Ben Gunter
  */
 public abstract class VFS {
@@ -43,6 +44,7 @@ public abstract class VFS {
    */
   public static final List<Class<? extends VFS>> USER_IMPLEMENTATIONS = new ArrayList<>();
 
+  // 单例持有者
   /** Singleton instance holder. */
   private static class VFSHolder {
     static final VFS INSTANCE = createVFS();

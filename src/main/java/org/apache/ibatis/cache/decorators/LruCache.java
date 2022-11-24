@@ -25,6 +25,8 @@ import org.apache.ibatis.cache.Cache;
  *
  * @author Clinton Begin
  */
+// 最近最少使用
+// LinkedHashMap 继承实现 removeEldestEntry
 public class LruCache implements Cache {
 
   private final Cache delegate;
@@ -69,6 +71,7 @@ public class LruCache implements Cache {
 
   @Override
   public Object getObject(Object key) {
+    // 刷新key在keymap中的位置, 最近使用过
     keyMap.get(key); // touch
     return delegate.getObject(key);
   }

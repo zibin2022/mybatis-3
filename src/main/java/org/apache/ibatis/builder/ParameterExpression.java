@@ -16,6 +16,7 @@
 package org.apache.ibatis.builder;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Inline parameter expression parser. Supported grammar (simplified):
@@ -31,7 +32,14 @@ import java.util.HashMap;
  *
  * @author Frank D. Martinez [mnesarco]
  */
+// 内置的参数表达式解析器  解析出 expression jdbcType property
 public class ParameterExpression extends HashMap<String, String> {
+
+  public static void main(String[] args) {
+    String s = "name:Integer";
+    Map<String, String> map = new ParameterExpression(s);
+    System.out.println(map);
+  }
 
   private static final long serialVersionUID = -2417552199605158680L;
 
@@ -71,6 +79,7 @@ public class ParameterExpression extends HashMap<String, String> {
     }
   }
 
+  // 跳过空格
   private int skipWS(String expression, int p) {
     for (int i = p; i < expression.length(); i++) {
       if (expression.charAt(i) > 0x20) {

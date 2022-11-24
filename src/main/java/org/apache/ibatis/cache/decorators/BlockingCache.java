@@ -34,6 +34,7 @@ import org.apache.ibatis.cache.CacheException;
  * @author Eduardo Macarron
  *
  */
+// 阻塞的缓存， 获取缓存持有锁，知道重新写入才释放锁， 可以设置相应超时时间
 public class BlockingCache implements Cache {
 
   private long timeout;
