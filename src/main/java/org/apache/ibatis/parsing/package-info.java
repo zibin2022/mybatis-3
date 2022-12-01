@@ -18,4 +18,5 @@
  *
  * 解析公共包
  */
+// xml解析有关
 package org.apache.ibatis.parsing;

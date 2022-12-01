@@ -18,6 +18,7 @@ package org.apache.ibatis.parsing;
 /**
  * @author Clinton Begin
  */
+// 通用令牌解析器
 public class GenericTokenParser {
 
   private final String openToken;

@@ -53,6 +53,16 @@ public class XMLStatementBuilder extends BaseBuilder {
     this.requiredDatabaseId = databaseId;
   }
 
+//    <update id="updateAuthorIfNecessary" parameterType="org.apache.ibatis.domain.blog.Author">
+//        update Author
+//        <set>
+//            <if test="username != null">username=#{username},</if>
+//            <if test="password != null">password=#{password},</if>
+//            <if test="email != null">email=#{email},</if>
+//            <if test="bio != null">bio=#{bio}</if>
+//        </set>
+//        where id=#{id}
+//    </update>
   public void parseStatementNode() {
     String id = context.getStringAttribute("id");
     String databaseId = context.getStringAttribute("databaseId");
@@ -115,7 +125,9 @@ public class XMLStatementBuilder extends BaseBuilder {
         resultSetTypeEnum, flushCache, useCache, resultOrdered,
         keyGenerator, keyProperty, keyColumn, databaseId, langDriver, resultSets);
   }
-
+//    <selectKey keyProperty="id" resultType="int" order="BEFORE">
+//      select CAST(RANDOM()*1000000 as INTEGER) a from SYSIBM.SYSDUMMY1
+//    </selectKey>
   private void processSelectKeyNodes(String id, Class<?> parameterTypeClass, LanguageDriver langDriver) {
     List<XNode> selectKeyNodes = context.evalNodes("selectKey");
     if (configuration.getDatabaseId() != null) {
@@ -135,6 +147,9 @@ public class XMLStatementBuilder extends BaseBuilder {
     }
   }
 
+  //     <selectKey keyProperty="id" resultType="int" order="BEFORE">
+  //      select CAST(RANDOM()*1000000 as INTEGER) a from SYSIBM.SYSDUMMY1
+  //    </selectKey>
   private void parseSelectKeyNode(String id, XNode nodeToHandle, Class<?> parameterTypeClass, LanguageDriver langDriver, String databaseId) {
     String resultType = nodeToHandle.getStringAttribute("resultType");
     Class<?> resultTypeClass = resolveClass(resultType);

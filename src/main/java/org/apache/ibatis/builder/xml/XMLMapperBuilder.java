@@ -52,6 +52,8 @@ import org.apache.ibatis.type.TypeHandler;
 /**
  * @author Clinton Begin
  * @author Kazuki Shimizu
+ *
+ * xml mapper解析
  */
 public class XMLMapperBuilder extends BaseBuilder {
 
@@ -90,6 +92,9 @@ public class XMLMapperBuilder extends BaseBuilder {
     this.resource = resource;
   }
 
+  //    <mappers>
+  //        <mapper class="org.apache.ibatis.submitted.basetest.Mapper" />
+  //    </mappers>
   public void parse() {
     if (!configuration.isResourceLoaded(resource)) {
       configurationElement(parser.evalNode("/mapper"));
@@ -106,6 +111,49 @@ public class XMLMapperBuilder extends BaseBuilder {
     return sqlFragments.get(refid);
   }
 
+//
+//<mapper namespace="org.apache.ibatis.domain.blog.mappers.AuthorMapper">
+//    <cache-ref namespace="..." />
+//    <parameterMap id="selectAuthor" type="org.apache.ibatis.domain.blog.Author">
+//        <parameter property="id" />
+//    </parameterMap>
+//
+//    <resultMap id="selectAuthor" type="org.apache.ibatis.domain.blog.Author">
+//        <id column="id" property="id" />
+//        <result property="username" column="username" />
+//        <result property="password" column="password" />
+//        <result property="email" column="email" />
+//        <result property="bio" column="bio" />
+//        <result property="favouriteSection" column="favourite_section" />
+//    </resultMap>
+//
+//    <select id="selectAuthorWithInlineParams" parameterType="int"
+//        resultType="org.apache.ibatis.domain.blog.Author">
+//        select * from author where id = #{id}
+//    </select>
+//
+//    <insert id="insertAuthor" parameterType="org.apache.ibatis.domain.blog.Author">
+//        insert into Author (id,username,password,email,bio)
+//        values (#{id},#{username},#{password},#{email},#{bio})
+//    </insert>
+//
+//    <delete id="deleteAuthor" parameterType="int">
+//        delete from Author where id = #{id}
+//    </delete>
+//
+//
+//    <update id="updateAuthorIfNecessary" parameterType="org.apache.ibatis.domain.blog.Author">
+//        update Author
+//        <set>
+//            <if test="username != null">username=#{username},</if>
+//            <if test="password != null">password=#{password},</if>
+//            <if test="email != null">email=#{email},</if>
+//            <if test="bio != null">bio=#{bio}</if>
+//        </set>
+//        where id=#{id}
+//    </update>
+//
+//</mapper>
   private void configurationElement(XNode context) {
     try {
       String namespace = context.getStringAttribute("namespace");
@@ -113,6 +161,7 @@ public class XMLMapperBuilder extends BaseBuilder {
         throw new BuilderException("Mapper's namespace cannot be empty");
       }
       builderAssistant.setCurrentNamespace(namespace);
+      // TODO cache-rf作用？
       cacheRefElement(context.evalNode("cache-ref"));
       cacheElement(context.evalNode("cache"));
       parameterMapElement(context.evalNodes("/mapper/parameterMap"));
@@ -199,6 +248,11 @@ public class XMLMapperBuilder extends BaseBuilder {
     }
   }
 
+  //     <cache type="org.apache.ibatis.submitted.global_variables.CustomCache">
+  //        <property name="stringValue" value="${stringProperty}"/>
+  //        <property name="integerValue" value="${integerProperty}"/>
+  //        <property name="longValue" value="${longProperty}"/>
+  //    </cache>
   private void cacheElement(XNode context) {
     if (context != null) {
       String type = context.getStringAttribute("type", "PERPETUAL");
@@ -213,7 +267,9 @@ public class XMLMapperBuilder extends BaseBuilder {
       builderAssistant.useNewCache(typeClass, evictionClass, flushInterval, size, readWrite, blocking, props);
     }
   }
-
+//    <parameterMap id="selectAuthor" type="org.apache.ibatis.domain.blog.Author">
+//        <parameter property="id" />
+//    </parameterMap>
   private void parameterMapElement(List<XNode> list) {
     for (XNode parameterMapNode : list) {
       String id = parameterMapNode.getStringAttribute("id");
@@ -239,7 +295,14 @@ public class XMLMapperBuilder extends BaseBuilder {
       builderAssistant.addParameterMap(id, parameterClass, parameterMappings);
     }
   }
-
+  //    <resultMap id="selectAuthor" type="org.apache.ibatis.domain.blog.Author">
+//        <id column="id" property="id" />
+//        <result property="username" column="username" />
+//        <result property="password" column="password" />
+//        <result property="email" column="email" />
+//        <result property="bio" column="bio" />
+//        <result property="favouriteSection" column="favourite_section" />
+//    </resultMap>
   private void resultMapElements(List<XNode> list) {
     for (XNode resultMapNode : list) {
       try {
@@ -254,6 +317,14 @@ public class XMLMapperBuilder extends BaseBuilder {
     return resultMapElement(resultMapNode, Collections.emptyList(), null);
   }
 
+  //    <resultMap id="selectAuthor" type="org.apache.ibatis.domain.blog.Author">
+//        <id column="id" property="id" />
+//        <result property="username" column="username" />
+//        <result property="password" column="password" />
+//        <result property="email" column="email" />
+//        <result property="bio" column="bio" />
+//        <result property="favouriteSection" column="favourite_section" />
+//    </resultMap>
   private ResultMap resultMapElement(XNode resultMapNode, List<ResultMapping> additionalResultMappings, Class<?> enclosingType) {
     ErrorContext.instance().activity("processing " + resultMapNode.getValueBasedIdentifier());
     String type = resultMapNode.getStringAttribute("type",

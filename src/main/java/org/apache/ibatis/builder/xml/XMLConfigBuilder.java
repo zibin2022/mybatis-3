@@ -289,6 +289,19 @@ public class XMLConfigBuilder extends BaseBuilder {
       }
       for (XNode child : context.getChildren()) {
         String id = child.getStringAttribute("id");
+        // 只加载default环境
+        //     <environments default="development">
+        //        <environment id="development">
+        //            <transactionManager type="JDBC">
+        //                <property name="" value="" />
+        //            </transactionManager>
+        //            <dataSource type="UNPOOLED">
+        //                <property name="driver" value="org.hsqldb.jdbcDriver" />
+        //                <property name="url" value="jdbc:hsqldb:mem:cursor_nested" />
+        //                <property name="username" value="sa" />
+        //            </dataSource>
+        //        </environment>
+        //    </environments>
         if (isSpecifiedEnvironment(id)) {
           TransactionFactory txFactory = transactionManagerElement(child.evalNode("transactionManager"));
           DataSourceFactory dsFactory = dataSourceElement(child.evalNode("dataSource"));
@@ -371,6 +384,12 @@ public class XMLConfigBuilder extends BaseBuilder {
     }
   }
 
+  //  <mappers>
+  //    <mapper resource="org/apache/ibatis/builder/BlogMapper.xml"/>
+  //    <mapper url="file:./src/test/resources/org/apache/ibatis/builder/NestedBlogMapper.xml"/>
+  //    <mapper class="org.apache.ibatis.builder.CachedAuthorMapper"/>
+  //    <package name="org.apache.ibatis.builder.mapper"/>
+  //  </mappers>
   private void mapperElement(XNode parent) throws Exception {
     if (parent != null) {
       for (XNode child : parent.getChildren()) {
