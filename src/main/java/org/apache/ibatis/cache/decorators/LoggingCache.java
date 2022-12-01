@@ -22,7 +22,7 @@ import org.apache.ibatis.logging.LogFactory;
 /**
  * @author Clinton Begin
  */
-// 可以答应缓存命中率
+// 可以打印缓存命中率
 public class LoggingCache implements Cache {
 
   private final Log log;

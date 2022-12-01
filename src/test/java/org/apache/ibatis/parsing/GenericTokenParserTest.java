@@ -60,6 +60,22 @@ class GenericTokenParserTest {
     assertEquals(expected, parser.parse(text));
   }
 
+  public static void main(String[] args) {
+
+    GenericTokenParser parser = new GenericTokenParser("${", "}", new VariableTokenHandler(new HashMap<String, String>() {
+      {
+        put("first_name", "James");
+        put("initial", "T");
+        put("last_name", "Kirk");
+        put("var{with}brace", "Hiya");
+        put("", "");
+      }
+    }));
+    String s = parser.parse("assss${first_name}   hahahah  ${first_name}  hhjdhdjfhjkdsghfd${var\\{with\\}brace}adhkjsdalhfkld");
+    System.out.println(s);
+
+  }
+
   static Stream<Arguments> shouldDemonstrateGenericTokenReplacementProvider() {
     return Stream.of(
       arguments("James T Kirk reporting.", "${first_name} ${initial} ${last_name} reporting."),

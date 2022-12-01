@@ -22,6 +22,8 @@ import org.apache.ibatis.session.Configuration;
 
 /**
  * @author Clinton Begin
+ *
+ * TODO 有什么作用？？
  */
 public class Discriminator {
 

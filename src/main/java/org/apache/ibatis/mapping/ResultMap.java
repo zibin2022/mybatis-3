@@ -47,6 +47,7 @@ public class ResultMap {
   private Set<String> mappedProperties;
   private Discriminator discriminator;
   private boolean hasNestedResultMaps;
+  // 是否有嵌套查询
   private boolean hasNestedQueries;
   private Boolean autoMapping;
 

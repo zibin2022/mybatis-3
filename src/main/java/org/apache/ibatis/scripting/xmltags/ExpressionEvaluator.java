@@ -25,6 +25,9 @@ import org.apache.ibatis.builder.BuilderException;
 
 /**
  * @author Clinton Begin
+ *
+ * 表达式评估
+ *
  */
 public class ExpressionEvaluator {
 

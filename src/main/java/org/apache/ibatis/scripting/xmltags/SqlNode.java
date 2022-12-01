@@ -17,6 +17,9 @@ package org.apache.ibatis.scripting.xmltags;
 
 /**
  * @author Clinton Begin
+ *
+ * sql 节点
+ *
  */
 public interface SqlNode {
   boolean apply(DynamicContext context);

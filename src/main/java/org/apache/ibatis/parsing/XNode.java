@@ -81,6 +81,7 @@ public class XNode {
       if (current != this) {
         builder.insert(0, "_");
       }
+      // 优先 id value property
       String value = current.getStringAttribute("id",
           current.getStringAttribute("value",
               current.getStringAttribute("property", (String) null)));

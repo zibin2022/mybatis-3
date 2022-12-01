@@ -29,6 +29,11 @@ import org.apache.ibatis.reflection.wrapper.ObjectWrapperFactory;
 
 /**
  * @author Clinton Begin
+ *
+ * 元对象
+ *
+ * 对象的包装
+ *
  */
 public class MetaObject {
 
@@ -112,6 +117,7 @@ public class MetaObject {
   public Object getValue(String name) {
     PropertyTokenizer prop = new PropertyTokenizer(name);
     if (prop.hasNext()) {
+      // 递归获取
       MetaObject metaValue = metaObjectForProperty(prop.getIndexedName());
       if (metaValue == SystemMetaObject.NULL_META_OBJECT) {
         return null;

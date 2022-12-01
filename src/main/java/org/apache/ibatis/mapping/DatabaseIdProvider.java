@@ -26,6 +26,8 @@ import javax.sql.DataSource;
  * This mechanism enables supporting multiple vendors or versions
  *
  * @author Eduardo Macarron
+ *
+ * 数据库id 生成
  */
 public interface DatabaseIdProvider {
 

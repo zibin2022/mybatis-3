@@ -15,5 +15,7 @@
  */
 /**
  * Parsing utils.
+ *
+ * 解析公共包
  */
 package org.apache.ibatis.parsing;

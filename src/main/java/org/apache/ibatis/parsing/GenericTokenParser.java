@@ -55,6 +55,7 @@ public class GenericTokenParser {
         } else {
           expression.setLength(0);
         }
+        // 添加 开头到 open token之间的内容
         builder.append(src, offset, start - offset);
         offset = start + openToken.length();
         int end = text.indexOf(closeToken, offset);
@@ -71,9 +72,11 @@ public class GenericTokenParser {
         }
         if (end == -1) {
           // close token was not found.
+          // 添加后面的内容
           builder.append(src, start, src.length - start);
           offset = src.length;
         } else {
+          //添加表达式的内容
           builder.append(handler.handleToken(expression.toString()));
           offset = end + closeToken.length();
         }

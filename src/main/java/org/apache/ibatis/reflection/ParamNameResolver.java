@@ -33,6 +33,8 @@ import org.apache.ibatis.session.RowBounds;
 
 /**
  * 参数名解析器
+ *
+ * 解析方法 如 aMethod(@Param("M") int a, @Param("N") int b)
  */
 public class ParamNameResolver {
 

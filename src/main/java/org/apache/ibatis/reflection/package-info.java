@@ -15,5 +15,7 @@
  */
 /**
  * Reflection utils.
+ *
+ * 反射包dene
  */
 package org.apache.ibatis.reflection;

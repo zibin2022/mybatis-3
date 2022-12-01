@@ -27,23 +27,34 @@ import org.apache.ibatis.type.TypeHandlerRegistry;
 
 /**
  * @author Clinton Begin
+ * 结果映射
  */
 public class ResultMapping {
 
   private Configuration configuration;
+  // 属性
   private String property;
+  // 列 , 隔开
   private String column;
   private Class<?> javaType;
   private JdbcType jdbcType;
   private TypeHandler<?> typeHandler;
+  // 嵌套结果映射id
   private String nestedResultMapId;
+  // 嵌套查询id
   private String nestedQueryId;
+  // 非空列
   private Set<String> notNullColumns;
+  // 列前缀
   private String columnPrefix;
+  // 结果标识 TODO 为什么是list
   private List<ResultFlag> flags;
+  // TODO ???
   private List<ResultMapping> composites;
   private String resultSet;
+  // 外键列
   private String foreignColumn;
+  //
   private boolean lazy;
 
   ResultMapping() {

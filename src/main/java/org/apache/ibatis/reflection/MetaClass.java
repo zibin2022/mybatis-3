@@ -19,8 +19,10 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Collection;
 
+import java.util.List;
 import org.apache.ibatis.reflection.invoker.GetFieldInvoker;
 import org.apache.ibatis.reflection.invoker.Invoker;
 import org.apache.ibatis.reflection.invoker.MethodInvoker;
@@ -28,6 +30,10 @@ import org.apache.ibatis.reflection.property.PropertyTokenizer;
 
 /**
  * @author Clinton Begin
+ *
+ * 元类
+ *
+ * 将一个类包装成metaClass后， 可以方便获取属性，getter方法等
  */
 public class MetaClass {
 
@@ -97,6 +103,7 @@ public class MetaClass {
     Class<?> type = reflector.getGetterType(prop.getName());
     if (prop.getIndex() != null && Collection.class.isAssignableFrom(type)) {
       Type returnType = getGenericGetterType(prop.getName());
+      // ParameterizedType 是否是范型的
       if (returnType instanceof ParameterizedType) {
         Type[] actualTypeArguments = ((ParameterizedType) returnType).getActualTypeArguments();
         if (actualTypeArguments != null && actualTypeArguments.length == 1) {

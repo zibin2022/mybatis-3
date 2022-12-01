@@ -29,6 +29,9 @@ import org.apache.ibatis.builder.BuilderException;
  * @author Eduardo Macarron
  *
  * @see <a href='https://github.com/mybatis/old-google-code-issues/issues/342'>Issue 342</a>
+ *
+ * ognl 表达式
+ *
  */
 public final class OgnlCache {
 

@@ -22,6 +22,8 @@ import org.apache.ibatis.session.Configuration;
 
 /**
  * @author Clinton Begin
+ *
+ * 参数映射
  */
 public class ParameterMap {
 

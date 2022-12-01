@@ -43,9 +43,13 @@ public class CacheBuilder {
   private final List<Class<? extends Cache>> decorators;
   private Integer size;
   private Long clearInterval;
+  // true 装饰成 SerializedCache
   private boolean readWrite;
   private Properties properties;
+  // true 装饰成 BlockingCache
   private boolean blocking;
+
+  // cache 都会被 LoggingCache 装饰
 
   public CacheBuilder(String id) {
     this.id = id;

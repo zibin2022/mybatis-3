@@ -27,6 +27,10 @@ import java.util.Arrays;
 
 /**
  * @author Iwao AVE!
+ *
+ * 类型参数工具
+ *
+ * 字段的类型， 方法的参数类型和返回类型
  */
 public class TypeParameterResolver {
 

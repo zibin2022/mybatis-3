@@ -19,6 +19,8 @@ import java.util.Iterator;
 
 /**
  * @author Clinton Begin
+ *
+ * property 分词器
  */
 public class PropertyTokenizer implements Iterator<PropertyTokenizer> {
   private String name;

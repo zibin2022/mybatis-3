@@ -50,6 +50,10 @@ import org.apache.ibatis.util.MapUtil;
  * allows for easy mapping between property names and getter/setter methods.
  *
  * @author Clinton Begin
+ *
+ * java16 java.lang.Record的使用
+ *
+ *
  */
 public class Reflector {
 
@@ -94,7 +98,7 @@ public class Reflector {
   private void addDefaultConstructor(Class<?> clazz) {
     Constructor<?>[] constructors = clazz.getDeclaredConstructors();
     Arrays.stream(constructors).filter(constructor -> constructor.getParameterTypes().length == 0)
-      .findAny().ifPresent(constructor -> this.defaultConstructor = constructor);
+      .findAny().ifPresent(constructor -> this.defaultConstructor = constructor); // get 新的写法
   }
 
   private void addGetMethods(Method[] methods) {

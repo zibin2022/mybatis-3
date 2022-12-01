@@ -24,6 +24,7 @@ import java.util.Map;
 
 import org.apache.ibatis.domain.misc.RichType;
 import org.apache.ibatis.domain.misc.generics.GenericConcrete;
+import org.apache.ibatis.reflection.invoker.Invoker;
 import org.junit.jupiter.api.Test;
 
 class MetaClassTest {

@@ -28,6 +28,10 @@ import org.apache.ibatis.session.Configuration;
 
 /**
  * @author Clinton Begin
+ *
+ * 动态内容解析
+ *
+ *
  */
 public class DynamicContext {
 

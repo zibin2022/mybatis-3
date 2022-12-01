@@ -98,6 +98,8 @@ import org.apache.ibatis.type.TypeHandlerRegistry;
 
 /**
  * @author Clinton Begin
+ *
+ * TODO
  */
 public class Configuration {
 
